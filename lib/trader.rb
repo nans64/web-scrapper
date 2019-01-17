@@ -6,25 +6,25 @@ def crypto_scrapper
 
 	url = "https://coinmarketcap.com/all/views/all/"
 	doc = Nokogiri::HTML(open("https://coinmarketcap.com/all/views/all/"))
-	jobs = Array.new
+	crypto_list = Array.new
 	object_counting = 1
 
 	while object_counting < 2
 
 			doc.xpath('//tr').each do |job_listing|
 				
-			job = {
+			scrapping = {
 				 symbol = job_listing.css('td.col-symbol').text =>
 				 value = job_listing.css('a.price').text
 			}
-			jobs << job
-			puts "Added #{job[symbol]}"
-			puts "Added #{job[value]}"
+			crypto_list << scrapping
+			puts "Added #{scrapping[symbol]}"
+			puts "Added #{scrapping[value]}"
 			puts ""	
 				
 		end
 
 		object_counting += 1
 	end
-   	return jobs 
+   	return crypto_list 
 end
