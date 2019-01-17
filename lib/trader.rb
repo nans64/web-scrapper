@@ -1,0 +1,30 @@
+	require 'open-uri'
+	require 'nokogiri'
+	require 'byebug'
+
+def crypto_scrapper
+
+	url = "https://coinmarketcap.com/all/views/all/"
+	doc = Nokogiri::HTML(open("https://coinmarketcap.com/all/views/all/"))
+	jobs = Array.new
+	object_counting = 1
+
+	while object_counting < 2
+
+			doc.xpath('//tr').each do |job_listing|
+				
+			job = {
+				 symbol = job_listing.css('td.col-symbol').text =>
+				 value = job_listing.css('a.price').text
+			}
+			jobs << job
+			puts "Added #{job[symbol]}"
+			puts "Added #{job[value]}"
+			puts ""	
+				
+		end
+
+		object_counting += 1
+	end
+   	return jobs 
+end
