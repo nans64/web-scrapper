@@ -6,7 +6,7 @@ def get_townhall_email(townhall_url)
 	 
 	mairie_list = Array.new # Create the Array
 
-	$lien.each do |link|
+	$url.each do |link|
 	doc = Nokogiri::HTML(open(link)) # Open the page
 
 	doc.xpath('/html').each do |node| # Loop to collect informations
@@ -31,14 +31,14 @@ def get_townhall_urls
 
 	doc2 = Nokogiri::HTML(open("http://annuaire-des-mairies.com/val-d-oise.html"))
 		doc2.css('html').each do |node|
-		$lien = doc2.css('a.lientxt').map { |link| "http://annuaire-des-mairies.com" + link['href'].delete_prefix(".") } # Reformat the URL
+		$url = doc2.css('a.lientxt').map { |link| "http://annuaire-des-mairies.com" + link['href'].delete_prefix(".") } # Reformat the URL
 
 		puts "j'ai fini de récupérer les liens"
-		$amount_links = $lien.count # Count the number of link
+		$amount_links = $url.count # Count the number of link
 
 		end 
 
-	get_townhall_email($lien)
+	get_townhall_email($url)
 
 end
  
