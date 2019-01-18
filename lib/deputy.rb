@@ -9,7 +9,7 @@ def get_deputy_emails(urls)
 	$url.each do |link|
 	doc = Nokogiri::HTML(open(link)) # Open the page
 
-	doc.xpath('//*[@id="b1"]').each_with_object(Hash.new(0)) do |node, hash| # Loop to collect informations
+	doc.xpath('//*[@id="b1"]').each do |node| # Loop to collect informations
 		
 			collect_emails = {
 
@@ -19,7 +19,7 @@ def get_deputy_emails(urls)
 			}
 
 			deputy_list << collect_emails
-			puts "Collection des informations en cours :) #{compteur -= 1}"
+			puts "Collection des informations en cours :) NUM : #{compteur -= 1} #{collect_emails} "
 			end
 	  
 	  end
@@ -38,3 +38,5 @@ def get_deputy_urls
 	get_deputy_emails($url)
 
 end 
+
+get_deputy_urls
